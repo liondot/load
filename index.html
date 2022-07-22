@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>loading</title>
+    <script src="main.js" defer></script>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        width: 100%;
+        overflow-x: hidden;
+    }
+    section {
+        height: 100vh;
+        border: 5px solid green;
+    }
+
+    .loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 100;
+        background: gray;
+        transition: .5s;
+        opacity: 0;
+    }
+
+    .loading-circle {
+        width: 54px;
+        height: 54px;
+        animation: loading_spin 3s infinite;
+    }
+
+    .before_load .loading {
+        opacity: 1;
+    }
+
+    @keyframes loading_spin{    
+        100%{transform: rotate(360deg);}
+    }
+    @keyframes loading_circle {
+       0% {stroke-dashoffset: 157}
+       75% {stroke-dashoffset: -147}
+       100% {stroke-dashoffset: -157}
+    }
+
+
+
+    .loading-circle circle {
+        stroke:#fff;
+        stroke-width: 4px;
+        fill: transparent;
+        stroke-dasharray: 157;
+        stroke-dashoffset: 0;
+        transition: 1s;
+        animation: loading_circle 1s infinite;
+    }
+
+    button {
+        width: 250px;
+        height: 100px;
+        border: 2px solid red;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        cursor: pointer;
+        font-size: 30px;
+        background: #ddd;
+    }
+
+</style>
+<body class="before_load">
+    <div class="loading">
+        <svg class="loading-circle" viewBox="0 0 54 54">
+            <circle cx="50%" cy="50%" r="25"></circle>
+        </svg>
+    </div>
+    <div class="wrapper">
+        <section>
+            <img src="1.png" alt="">
+            <button>button</button>
+        </section>
+        <section>
+            <img src="my_trip.png" alt="">
+
+        </section>
+        <section>
+            <img src="responsive_device.png" alt="">
+
+        </section>
+        <section>
+            <img src="1.png" alt="">
+
+        </section>
+        <section>
+            <img src="my_trip.png" alt="">
+
+        </section>
+        <section>
+            <img src="responsive_device.png" alt="">
+
+        </section>
+    </div>
+
+    <script>
+        window.addEventListener('load', ()=> {
+            document.body.classList.remove('before_load')
+            // document.body.removeChild(document.querySelector('.loading'))
+        })
+        document.querySelector('.loading').addEventListener('transitionend', (e) => {
+            document.body.removeChild(e.currentTarget);
+        })
+    </script>
+</body>
+</html>
